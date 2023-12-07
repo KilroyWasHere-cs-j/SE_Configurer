@@ -1,15 +1,10 @@
 ﻿@using SE_Configurer.Data
 
-<div class="title">
-    @Trackable.Title
-</div>
+<h2>@Trackable.Title</h2>
 
-<div class="items">
-    @foreach (string item in Trackable.Items)
-    {
-        @item
-    }
-</div>
+<td>
+    @string.Join(", ", Trackable.Items.Select(x => x).ToArray())
+</td>
 
 @code {
     [Parameter]

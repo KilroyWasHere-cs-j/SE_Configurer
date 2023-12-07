@@ -4,6 +4,6 @@
     {
         public string Title { get; set; }
         public string[] Items { get; set; }
-        public string ItemsHold { get; set; }
+        public bool[] Hide { get; set; }
     }
 }

@@ -7,6 +7,8 @@
         <h1>Configurer</h1>
         <p>Name of the current active configuration: @configurationName</p>
         <input type="text" @bind="configurationName" placeholder="Configuration Name" />
+        <input type="text" @bind="defaultComboBoxText" placeholder="Default ComboBox Text" />
+        <input type="text" @bind="clickCountLabel" placeholder="Click Count Label" />
 
         <button class="createConfig" @onclick="CreateConfig">Create new config</button>
     </div>
@@ -19,12 +21,10 @@
         <div class="auto">
             <h2>Autonomous</h2>
 
-            <ul>
-                @foreach(Trackable trackable in autoTrackablesList)
-                {
-                    <li><CTrackable Trackable=trackable/></li>
-                }
-            </ul>
+            @foreach (Trackable trackable in autoTrackablesList)
+            {
+                <div><CTrackable Trackable=trackable /></div>
+            }
 
             <input type="text" @bind=autoTrackableTitle placeholder="Trackable Name" />
             <input type="text" @bind=autoTrackableItemsHold placeholder="Trackable Fill" />
@@ -52,9 +52,14 @@
 </div>
 
 @code {
+    Configuration config = new Configuration();
 
     // Stores the name of the current configuration
     private string configurationName = "";
+    private string AppName = "ScoutEyeEX";
+    private string AppVersion = "v2.5.4EX";
+    private string defaultComboBoxText = "0";
+    private string clickCountLabel = "Click Count: ";
 
     // Hold over variables for auto trackable creation
     private string autoTrackableTitle = "";
@@ -71,7 +76,24 @@
     // Complies all trackables into a single object
     private void CreateConfig()
     {
+        // If the user did not enter a configuration name, randomly select one from a wonderful list of fun fish names
+        if(configurationName == "" || configurationName == null)
+        {
+            string[] configNames = { "Mahi mahi", "Buoyant Betta", "Crazy Carp", "Frolicking Flounder", "Opulent Oscar", "Tilted Tilpia", "Goody Goodei", "Dancing Dottyback" };
 
+            Random rnd = new Random();
+            configurationName = configNames[rnd.Next(0, configNames.Length)];
+        }
+
+        // Creates a new configuration object
+
+        // Sets the configuration's title and trackables to the user input
+        config.Title = configurationName;
+        config.Trackables = autoTrackablesList.Concat(teleopTrackablesList).ToList();
+        
+        // Converts the configuration object to a JSON string
+        var json = Newtonsoft.Json.JsonConvert.SerializeObject(config);
+        Console.WriteLine(json);
     }
 
     // Adds a trackable to the auto trackable list
@@ -84,10 +106,10 @@
         trackable.Title = autoTrackableTitle;
         trackable.Items = autoTrackableItemsHold.Split(',');
 
-        Console.WriteLine(trackable.Title);
+        Console.WriteLine("Auto Trackable Title: " + trackable.Title);
         foreach(string item in trackable.Items)
         {
-            Console.WriteLine(item);
+            Console.WriteLine("Auto Item: " + item);
         }
 
         // Adds the trackable to the auto trackable list
@@ -104,10 +126,10 @@
         trackable.Title = teleopTrackableTitle;
         trackable.Items = teleopTrackableItemsHold.Split(',');
 
-        Console.WriteLine(trackable.Title);
+        Console.WriteLine("Teleop Trackable Title: " + trackable.Title);
         foreach(string item in trackable.Items)
         {
-            Console.WriteLine(item);
+            Console.WriteLine("Teleop Item: " + item);
         }
 
         // Adds the trackable to the teleop trackable list
