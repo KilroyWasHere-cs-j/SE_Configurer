@@ -1,0 +1,62 @@
+﻿h1 {
+    color: black;
+    font-family: Tahoma, Geneva, Verdana, sans-serif;
+}
+
+h2{
+    color: black;
+    font-size: 20px;
+    font-family: Tahoma, Geneva, Verdana, sans-serif;
+}
+
+input[type=text] {
+    width: 100%;
+    padding: 12px 20px;
+    margin: 8px 0;
+    box-sizing: border-box;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    color: black;
+}
+
+.body {
+    
+}
+
+.controls {
+    background-color: #e7e7e7;
+}
+
+.config {
+    background-color: #e7e7e7;
+}
+
+.auto{
+    background-color: #e7e7e7;
+}
+
+.teleop{
+    background-color: #e7e7e7;
+}
+
+.vBuf{
+    height: 100px;
+}
+
+.createConfig {
+    background-color: #2B0B98;
+    color: #e7e7e7;
+    border: 1px solid #e7e7e7;
+    border-radius: 5px;
+    padding: 10px;
+    margin: 10px;
+}
+
+.addTrackable{
+background-color: #2B0B98;
+    color: #e7e7e7;
+    border: 1px solid #e7e7e7;
+    border-radius: 5px;
+    padding: 10px;
+    margin: 10px;
+}

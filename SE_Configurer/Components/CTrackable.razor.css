@@ -1,0 +1,24 @@
+﻿body {
+background-color: #fff;
+    color: #000;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 1.42857143;
+    margin: 0;
+    padding: 0;
+}
+
+.title{
+    font-size: 20px;
+    font-weight: 600;
+    margin-bottom: 10px;
+    float: left;
+}
+
+.items {
+    font-size: 20px;
+    font-weight: 600;
+    margin-bottom: 10px;
+    float: right;
+}

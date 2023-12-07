@@ -1,0 +1,116 @@
+﻿@page "/Configurer"
+@using SE_Configurer.Components
+@using SE_Configurer.Data
+
+<div class="body">
+    <div class="controls">
+        <h1>Configurer</h1>
+        <p>Name of the current active configuration: @configurationName</p>
+        <input type="text" @bind="configurationName" placeholder="Configuration Name" />
+
+        <button class="createConfig" @onclick="CreateConfig">Create new config</button>
+    </div>
+
+    <div class="vBuf" />
+
+    <div class="config">
+        <h1>Trackables</h1>
+        
+        <div class="auto">
+            <h2>Autonomous</h2>
+
+            <ul>
+                @foreach(Trackable trackable in autoTrackablesList)
+                {
+                    <li><CTrackable Trackable=trackable/></li>
+                }
+            </ul>
+
+            <input type="text" @bind=autoTrackableTitle placeholder="Trackable Name" />
+            <input type="text" @bind=autoTrackableItemsHold placeholder="Trackable Fill" />
+
+            <button class="addTrackable" @onclick="AddAutoTrackable">Add Trackable</button>
+
+        </div>
+
+        <div class="teleop">
+            <h2>Teleoporated</h2>
+
+            <ul>
+                @foreach(Trackable trackable in teleopTrackablesList)
+                {
+                    <li><CTrackable Trackable=trackable/></li>
+                }
+            </ul>
+
+            <input type="text" @bind=teleopTrackableTitle placeholder="Trackable Name" />
+            <input type="text" @bind=teleopTrackableItemsHold placeholder="Trackable Fill" />
+
+            <button class="addTrackable" @onclick="AddTeleopTrackable">Add Trackable</button>
+        </div>
+    </div>
+</div>
+
+@code {
+
+    // Stores the name of the current configuration
+    private string configurationName = "";
+
+    // Hold over variables for auto trackable creation
+    private string autoTrackableTitle = "";
+    private string autoTrackableItemsHold = "";
+
+    // Hold over variables for teleop trackable creation
+    private string teleopTrackableTitle = "";
+    private string teleopTrackableItemsHold = "";
+
+    // Creates lists to store user created trackables
+    private List<Trackable> autoTrackablesList = new List<Trackable>();
+    private List<Trackable> teleopTrackablesList = new List<Trackable>();
+
+    // Complies all trackables into a single object
+    private void CreateConfig()
+    {
+
+    }
+
+    // Adds a trackable to the auto trackable list
+    private void AddAutoTrackable()
+    {
+        // Creates a new trackable object
+        Trackable trackable = new Trackable();
+
+        // Sets the trackable's title and items held to the user input
+        trackable.Title = autoTrackableTitle;
+        trackable.Items = autoTrackableItemsHold.Split(',');
+
+        Console.WriteLine(trackable.Title);
+        foreach(string item in trackable.Items)
+        {
+            Console.WriteLine(item);
+        }
+
+        // Adds the trackable to the auto trackable list
+        autoTrackablesList.Add(trackable);
+    }
+
+    // Adds a trackable to the teleop trackable list
+    private void AddTeleopTrackable()
+    {
+        // Creates a new trackable object
+        Trackable trackable = new Trackable();
+
+        // Sets the trackable's title and items held to the user input
+        trackable.Title = teleopTrackableTitle;
+        trackable.Items = teleopTrackableItemsHold.Split(',');
+
+        Console.WriteLine(trackable.Title);
+        foreach(string item in trackable.Items)
+        {
+            Console.WriteLine(item);
+        }
+
+        // Adds the trackable to the teleop trackable list
+        teleopTrackablesList.Add(trackable);
+    }
+}

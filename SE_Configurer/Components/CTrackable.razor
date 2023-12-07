@@ -1,0 +1,17 @@
+﻿@using SE_Configurer.Data
+
+<div class="title">
+    @Trackable.Title
+</div>
+
+<div class="items">
+    @foreach (string item in Trackable.Items)
+    {
+        @item
+    }
+</div>
+
+@code {
+    [Parameter]
+    public Trackable Trackable { get; set; }
+}
